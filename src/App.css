@@ -1,38 +1,119 @@
-.App {
+/* Fonts and Global Settings */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #E3F1E2; /* Light green background for a rainforest feel */
+  color: #2F2E2D; /* Dark neutral text for contrast */
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Styling */
+header {
+  background-color: #090378; /* Deep rainforest blue */
+  color: #E3F1E2; /* Light contrast for text */
   text-align: center;
+  padding: 20px 0;
+  font-size: 1.5rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Form Section */
+form {
+  background-color: #090124; /* Dark jungle green */
+  color: #FFFFFF; /* Light text on dark background */
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form input,
+form textarea,
+form button {
+  font-family: 'Poppins', sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+form button {
+  background-color: #020066; /* Bold rainforest accent color */
+  color: #FFF;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #060041; /* Darker shade for hover effect */
+}
+
+/* Destination Card */
+.destination-card {
+  background-color: #090246; /* Earthy rainforest green */
+  color: #FFF;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Destination Card Tags */
+.destination-card .tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #FFF;
+  background-color: #3C9C59; /* Bright leaf green */
+}
+
+/* Buttons */
+button {
+  background-color: #030529; /* Deep purple rainforest accent */
   color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  background-color: #020416; /* Dark purple shade */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Destination List */
+.destination-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
+/* Footer */
+footer {
+  background-color: #0A0A0A;
+  color: #E3F1E2;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
 }
