@@ -1,27 +1,34 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addDestination } from '../../store/destinationsSlice';
-import './DestinationForm.css';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addDestination } from "../../store/destinationsSlice";
+import "./DestinationForm.css";
 
 const DestinationForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-  });
-
   const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    bestTime: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.description) return;
+    if (!formData.name) return;
 
-    dispatch(addDestination({ ...formData, id: Date.now() }));
-    setFormData({ name: '', description: '' });
+    dispatch(
+      addDestination({
+        ...formData,
+        id: Date.now(),
+        visited: false,
+      })
+    );
+
+    setFormData({ name: "", description: "", bestTime: "" });
   };
 
   return (
-    <form className="destination-form" onSubmit={handleSubmit}>
-      <h2>Add Destination</h2>
+    <form onSubmit={handleSubmit} className="destination-form">
+      <h2>Add a Destination</h2>
       <input
         type="text"
         placeholder="Destination Name"
@@ -34,7 +41,13 @@ const DestinationForm = () => {
         onChange={(e) =>
           setFormData({ ...formData, description: e.target.value })
         }
-      ></textarea>
+      />
+      <input
+        type="text"
+        placeholder="Best Time to Visit"
+        value={formData.bestTime}
+        onChange={(e) => setFormData({ ...formData, bestTime: e.target.value })}
+      />
       <button type="submit">Add Destination</button>
     </form>
   );

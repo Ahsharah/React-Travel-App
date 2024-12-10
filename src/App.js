@@ -1,17 +1,14 @@
-import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
-import DestinationList from './components/DestinationList/DestinationList';
-import DestinationForm from './components/DestinationForm/DestinationForm';
+import React from "react";
+import DestinationList from "./components/DestinationList/DestinationList";
+import DestinationForm from "./components/DestinationForm/DestinationForm";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header />
-      <main>
-        <DestinationForm />
-        <DestinationList />
-      </main>
+      <DestinationForm />
+      <DestinationList />
     </div>
   );
 }
