@@ -1,34 +1,37 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleVisited, deleteDestination } from '../../store/destinationsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeDestination, toggleVisited } from '../../store/destinationsSlice';
 import DestinationCard from './DestinationCard';
 
 const DestinationList = () => {
-  const destinations = useSelector(state => state.destinations);
+  const destinations = useSelector((state) => state.destinations);
   const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(removeDestination(id));
+  };
 
   const handleToggleVisited = (id) => {
     dispatch(toggleVisited(id));
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteDestination(id));
-  };
-
   return (
-    <div className="destination-list">
-      {destinations.length === 0 ? (
-        <p>No destinations added yet!</p>
-      ) : (
-        destinations.map(dest => (
-          <DestinationCard
-            key={dest.id}
-            destination={dest}
-            onToggleVisited={handleToggleVisited}
-            onDelete={handleDelete}
-          />
-        ))
-      )}
+    <div>
+      <h2>Your Destinations</h2>
+      <div>
+        {destinations.length > 0 ? (
+          destinations.map((destination) => (
+            <DestinationCard
+              key={destination.id}
+              destination={destination}
+              onToggleVisited={handleToggleVisited}
+              onDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <p>No destinations added yet!</p>
+        )}
+      </div>
     </div>
   );
 };

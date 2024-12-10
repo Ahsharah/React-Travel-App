@@ -8,16 +8,14 @@ const destinationsSlice = createSlice({
       state.push(action.payload);
     },
     toggleVisited: (state, action) => {
-      const destination = state.find(dest => dest.id === action.payload);
-      if (destination) {
-        destination.visited = !destination.visited;
-      }
+      const destination = state.find((dest) => dest.id === action.payload);
+      if (destination) destination.visited = !destination.visited;
     },
-    deleteDestination: (state, action) => {
-      return state.filter(dest => dest.id !== action.payload);
+    removeDestination: (state, action) => {
+      return state.filter((dest) => dest.id !== action.payload);
     },
   },
 });
 
-export const { addDestination, toggleVisited, deleteDestination } = destinationsSlice.actions;
+export const { addDestination, toggleVisited, removeDestination } = destinationsSlice.actions;
 export default destinationsSlice.reducer;
