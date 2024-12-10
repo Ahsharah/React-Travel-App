@@ -1,20 +1,18 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store/store';
-import Header from './components/Header/Header';
-import DestinationForm from './components/DestinationForm/DestinationForm';
-import DestinationList from './components/DestinationList/DestinationList';
 import './App.css';
+import Header from './components/Header/Header';
+import DestinationList from './components/DestinationList/DestinationList';
+import DestinationForm from './components/DestinationForm/DestinationForm';
 
 function App() {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Header />
+    <div className="App">
+      <Header />
+      <main>
         <DestinationForm />
         <DestinationList />
-      </div>
-    </Provider>
+      </main>
+    </div>
   );
 }
 
