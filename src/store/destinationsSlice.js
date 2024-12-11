@@ -1,21 +1,54 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getDestinations, addDestination } from '../api/destinationAPI';
+
+const initialState = {
+  items: [],
+  status: 'idle',
+  error: null,
+};
+
+export const fetchDestinations = createAsyncThunk(
+  'destinations/fetchDestinations',
+  async () => {
+    const response = await getDestinations();
+    return response;
+  }
+);
+
+export const postDestination = createAsyncThunk(
+  'destinations/postDestination',
+  async (newDestination) => {
+    const response = await addDestination(newDestination);
+    return response;
+  }
+);
 
 const destinationsSlice = createSlice({
   name: 'destinations',
-  initialState: [],
+  initialState,
   reducers: {
-    addDestination: (state, action) => {
-      state.push(action.payload);
-    },
-    toggleVisited: (state, action) => {
-      const destination = state.find((dest) => dest.id === action.payload);
-      if (destination) destination.visited = !destination.visited;
-    },
     removeDestination: (state, action) => {
-      return state.filter((dest) => dest.id !== action.payload);
+      state.items = state.items.filter((destination) => destination.id !== action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDestinations.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchDestinations.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items = action.payload;
+      })
+      .addCase(fetchDestinations.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(postDestination.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      });
   },
 });
 
-export const { addDestination, toggleVisited, removeDestination } = destinationsSlice.actions;
+export const { removeDestination } = destinationsSlice.actions;
 export default destinationsSlice.reducer;

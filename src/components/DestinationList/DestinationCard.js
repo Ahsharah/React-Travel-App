@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DestinationCard = ({ destination, onToggleVisited, onDelete }) => {
+const DestinationCard = ({ destination, onRemove }) => {
   return (
     <div className="destination-card">
       <h3>{destination.name}</h3>
@@ -8,12 +8,7 @@ const DestinationCard = ({ destination, onToggleVisited, onDelete }) => {
       <p>
         <strong>Best Time to Visit:</strong> {destination.bestTime}
       </p>
-      <div>
-        <button onClick={() => onToggleVisited(destination.id)}>
-          {destination.visited ? 'Visited' : 'Not Visited'}
-        </button>
-        <button onClick={() => onDelete(destination.id)}>Delete</button>
-      </div>
+      <button onClick={() => onRemove(destination.id)}>Remove</button>
     </div>
   );
 };

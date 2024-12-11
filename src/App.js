@@ -1,16 +1,32 @@
-import React from "react";
-import DestinationList from "./components/DestinationList/DestinationList";
-import DestinationForm from "./components/DestinationForm/DestinationForm";
-import Header from "./components/Header/Header";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDestinations } from './store/destinationsSlice';
+import DestinationForm from './components/DestinationForm/DestinationForm';
+import DestinationList from './components/DestinationList/DestinationList';
+import './App.css';
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  const destinations = useSelector((state) => state.destinations.items);
+  const status = useSelector((state) => state.destinations.status);
+
+  useEffect(() => {
+    dispatch(fetchDestinations());
+  }, [dispatch]);
+
   return (
-    <div>
-      <Header />
-      <DestinationForm />
-      <DestinationList />
+    <div className="App">
+      <header>
+        <h1>Travel Organizer App</h1>
+      </header>
+      <main>
+        <DestinationForm />
+        {status === 'loading' && <p>Loading destinations...</p>}
+        {status === 'failed' && <p>Failed to load destinations!</p>}
+        <DestinationList destinations={destinations} />
+      </main>
     </div>
   );
-}
+};
 
 export default App;

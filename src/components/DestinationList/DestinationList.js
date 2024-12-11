@@ -1,18 +1,14 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeDestination, toggleVisited } from '../../store/destinationsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeDestination } from '../../store/destinationsSlice';
 import DestinationCard from './DestinationCard';
 
 const DestinationList = () => {
-  const destinations = useSelector((state) => state.destinations);
+  const destinations = useSelector((state) => state.destinations.items);
   const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
+  const handleRemove = (id) => {
     dispatch(removeDestination(id));
-  };
-
-  const handleToggleVisited = (id) => {
-    dispatch(toggleVisited(id));
   };
 
   return (
@@ -24,8 +20,7 @@ const DestinationList = () => {
             <DestinationCard
               key={destination.id}
               destination={destination}
-              onToggleVisited={handleToggleVisited}
-              onDelete={handleDelete}
+              onRemove={handleRemove}
             />
           ))
         ) : (
